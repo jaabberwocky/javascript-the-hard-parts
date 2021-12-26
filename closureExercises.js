@@ -1,35 +1,37 @@
 // CHALLENGE 1
 function createFunction() {
-	function sayHello() {console.log("hello");}
-  return sayHello;
+    function sayHello() {
+        console.log("hello");
+    }
+    return sayHello;
 }
 
 // /*** Uncomment these to check your work! ***/
 const function1 = createFunction();
 function1(); // => should console.log('hello');
 
-
 // CHALLENGE 2
 function createFunctionPrinter(input) {
-	function sayInput() {console.log(input);}
-  return sayInput;
+    function sayInput() {
+        console.log(input);
+    }
+    return sayInput;
 }
 
 // /*** Uncomment these to check your work! ***/
-const printSample = createFunctionPrinter('sample');
+const printSample = createFunctionPrinter("sample");
 printSample(); // => should console.log('sample');
-const printHello = createFunctionPrinter('hello');
+const printHello = createFunctionPrinter("hello");
 printHello(); // => should console.log('hello');
-
 
 // CHALLENGE 3
 function outer() {
-  let counter = 0; // this variable is outside incrementCounter's scope
-  function incrementCounter () {
-    counter ++;
-    console.log('counter', counter);
-  }
-  return incrementCounter;
+    let counter = 0; // this variable is outside incrementCounter's scope
+    function incrementCounter() {
+        counter++;
+        console.log("counter", counter);
+    }
+    return incrementCounter;
 }
 
 const willCounter = outer();
@@ -46,10 +48,11 @@ willCounter();
 jasCounter();
 willCounter();
 
-
 function addByX(x) {
-  function add(input) {return x + input;}
-  return add;
+    function add(input) {
+        return x + input;
+    }
+    return add;
 }
 
 // /*** Uncomment these to check your work! ***/
@@ -66,215 +69,210 @@ const addByFour = addByX(4);
 addByFour(4); // => should return 8
 addByFour(5); // => should return 9
 
-
 // CHALLENGE 4
 function once(func) {
-  let counter = 0;
-  let result;
-	function inner(x) {
-    if (counter == 0) {
-      result = func(x);
-      counter++;
+    let counter = 0;
+    let result;
+    function inner(x) {
+        if (counter == 0) {
+            result = func(x);
+            counter++;
+        }
+        return result;
     }
-    return result;
-  }
-  return inner;
+    return inner;
 }
-  
+
 // /*** Uncomment these to check your work! ***/
 const onceFunc = once(addByTwo);
-console.log(onceFunc(4));  // => should log 6
-console.log(onceFunc(10));  // => should log 6
-console.log(onceFunc(9001));  // => should log 6
-
+console.log(onceFunc(4)); // => should log 6
+console.log(onceFunc(10)); // => should log 6
+console.log(onceFunc(9001)); // => should log 6
 
 // CHALLENGE 5
 function after(count, func) {
-	let current = 1;
-  let totalCount = count;
-  function inner() {
-    if (current >= totalCount) {
-      func();
+    let current = 1;
+    let totalCount = count;
+    function inner() {
+        if (current >= totalCount) {
+            func();
+        }
+        current++;
     }
-    current++;
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
-const called = function() { console.log('hello') };
+const called = function () {
+    console.log("hello");
+};
 const afterCalled = after(3, called);
 afterCalled(); // => nothing is printed
 afterCalled(); // => nothing is printed
 afterCalled(); // => 'hello' is printed
 
-
 // CHALLENGE 6
 function delay(func, wait, ...args) {
-  setTimeout(func, wait, ...args);
+    setTimeout(func, wait, ...args);
 }
-
 
 // CHALLENGE 7
 function rollCall(names) {
-  let nameArr = names;
-  let current = 0;
-  function innerCall() {
-    if (current > nameArr.length - 1) {
-      console.log('Everyone accounted for');
-    } else {
-      console.log(nameArr[current])
+    let nameArr = names;
+    let current = 0;
+    function innerCall() {
+        if (current > nameArr.length - 1) {
+            console.log("Everyone accounted for");
+        } else {
+            console.log(nameArr[current]);
+        }
+        current++;
     }
-    current++;
-  }
-	return innerCall;
+    return innerCall;
 }
 
 // /*** Uncomment these to check your work! ***/
-const rollCaller = rollCall(['Victoria', 'Juan', 'Ruth'])
-rollCaller() // => should log 'Victoria'
-rollCaller() // => should log 'Juan'
-rollCaller() // => should log 'Ruth'
-rollCaller() // => should log 'Everyone accounted for'
-
+const rollCaller = rollCall(["Victoria", "Juan", "Ruth"]);
+rollCaller(); // => should log 'Victoria'
+rollCaller(); // => should log 'Juan'
+rollCaller(); // => should log 'Ruth'
+rollCaller(); // => should log 'Everyone accounted for'
 
 // CHALLENGE 8
 function saveOutput(func, magicWord) {
-	let results = {};
-  function inner(arg) {
-    if (arg === magicWord) {
-      return results;
-    } else {
-      results[arg] = func(arg);
-      return results[arg];
+    let results = {};
+    function inner(arg) {
+        if (arg === magicWord) {
+            return results;
+        } else {
+            results[arg] = func(arg);
+            return results[arg];
+        }
     }
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
-const multiplyBy2 = function(num) { return num * 2; };
-const multBy2AndLog = saveOutput(multiplyBy2, 'boo');
+const multiplyBy2 = function (num) {
+    return num * 2;
+};
+const multBy2AndLog = saveOutput(multiplyBy2, "boo");
 console.log(multBy2AndLog(2)); // => should log 4
 console.log(multBy2AndLog(9)); // => should log 18
-console.log(multBy2AndLog('boo')); // => should log { 2: 4, 9: 18 }
-
+console.log(multBy2AndLog("boo")); // => should log { 2: 4, 9: 18 }
 
 // CHALLENGE 9
 function cycleIterator(array) {
-	let arr = array;
-  let current = 0;
-  
-  function inner() {
-    let result;
-    result = arr[current];
-    
-    if (current >= arr.length - 1) {
-      current = 0;
-    } else {
-      current++;
+    let arr = array;
+    let current = 0;
+
+    function inner() {
+        let result;
+        result = arr[current];
+
+        if (current >= arr.length - 1) {
+            current = 0;
+        } else {
+            current++;
+        }
+        return result;
     }
-    return result;
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
-const threeDayWeekend = ['Fri', 'Sat', 'Sun'];
+const threeDayWeekend = ["Fri", "Sat", "Sun"];
 const getDay = cycleIterator(threeDayWeekend);
 console.log(getDay()); // => should log 'Fri'
 console.log(getDay()); // => should log 'Sat'
 console.log(getDay()); // => should log 'Sun'
 console.log(getDay()); // => should log 'Fri'
 
-
 // CHALLENGE 10
 function defineFirstArg(func, arg) {
-  function inner(...args) {
-    return func(arg, ...args);
-  }
-  return inner;
+    function inner(...args) {
+        return func(arg, ...args);
+    }
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
-const subtract = function(big, small) { return big - small; };
+const subtract = function (big, small) {
+    return big - small;
+};
 const subFrom20 = defineFirstArg(subtract, 20);
 console.log(subFrom20(5)); // => should log 15
 
-
 // CHALLENGE 11
 function dateStamp(func) {
-	function inner(...args) {
-    let obj = {};
-    obj['date'] = new Date().toISOString();
-    obj['output'] = func(...args);
-    return obj;
-  }
-  return inner;
+    function inner(...args) {
+        let obj = {};
+        obj["date"] = new Date().toISOString();
+        obj["output"] = func(...args);
+        return obj;
+    }
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
-const stampedMultBy2 = dateStamp(n => n * 2);
+const stampedMultBy2 = dateStamp((n) => n * 2);
 console.log(stampedMultBy2(4)); // => should log { date: (today's date), output: 8 }
 console.log(stampedMultBy2(6)); // => should log { date: (today's date), output: 12 }
 
-
 // CHALLENGE 12
 function censor() {
-  let replacementObj = {};
-  
-	function inner(...args) {
-    if (arguments.length > 1) {
-      replacementObj[arguments[0]] = arguments[1];
-    } else {
-      let splitWords = arguments[0].split(" ");
-      for (let i = 0; i < splitWords.length; i++) {
-        if (splitWords[i] in replacementObj) {
-          splitWords[i] = replacementObj[splitWords[i]];
-        } 
-      }
-      return splitWords.join(" ");
+    let replacementObj = {};
+
+    function inner(...args) {
+        if (arguments.length > 1) {
+            replacementObj[arguments[0]] = arguments[1];
+        } else {
+            let splitWords = arguments[0].split(" ");
+            for (let i = 0; i < splitWords.length; i++) {
+                if (splitWords[i] in replacementObj) {
+                    splitWords[i] = replacementObj[splitWords[i]];
+                }
+            }
+            return splitWords.join(" ");
+        }
     }
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
 const changeScene = censor();
-changeScene('dogs', 'cats');
-changeScene('quick', 'slow');
-console.log(changeScene('The quick brown fox jumps over the lazy dogs')); // => should log 'The slow, brown fox jumps over the lazy cats.' // not dealing with punctuation stripping now
-
+changeScene("dogs", "cats");
+changeScene("quick", "slow");
+console.log(changeScene("The quick brown fox jumps over the lazy dogs")); // => should log 'The slow, brown fox jumps over the lazy cats.' // not dealing with punctuation stripping now
 
 // CHALLENGE 13
 function createSecretHolder(secret) {
-  let innerSecret = secret;
-  let obj = {
-  	getSecret() {
-      return innerSecret;
-    },
-    setSecret(s) {
-      innerSecret = s;
-    }
-  };
-  return obj;
+    let innerSecret = secret;
+    let obj = {
+        getSecret() {
+            return innerSecret;
+        },
+        setSecret(s) {
+            innerSecret = s;
+        },
+    };
+    return obj;
 }
 
 // /*** Uncomment these to check your work! ***/
-let x = createSecretHolder(5)
-console.log(x.getSecret()) // => returns 5
-x.setSecret(2)
-console.log(x.getSecret()) // => returns 2
-
+let x = createSecretHolder(5);
+console.log(x.getSecret()); // => returns 5
+x.setSecret(2);
+console.log(x.getSecret()); // => returns 2
 
 // CHALLENGE 14
 function callTimes() {
-  let counter = 0;
-  function inner() {
-    counter++;
-    console.log(counter);
-  }
-  return inner;
+    let counter = 0;
+    function inner() {
+        counter++;
+        console.log(counter);
+    }
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
@@ -285,22 +283,21 @@ myNewFunc1(); // => 2
 myNewFunc2(); // => 1
 myNewFunc2(); // => 2
 
-
 // CHALLENGE 15
 function russianRoulette(num) {
-  let n = num;
-  let counter = 0;
-  function inner() {
-    counter++;
-    if (counter < n) {
-      return 'click';
-    } else if (counter === n) {
-      return 'bang';
-    } else {
-      return 'reload to play again';
+    let n = num;
+    let counter = 0;
+    function inner() {
+        counter++;
+        if (counter < n) {
+            return "click";
+        } else if (counter === n) {
+            return "bang";
+        } else {
+            return "reload to play again";
+        }
     }
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
@@ -311,21 +308,20 @@ console.log(play()); // => should log 'bang'
 console.log(play()); // => should log 'reload to play again'
 console.log(play()); // => should log 'reload to play again'
 
-
 // CHALLENGE 16
 function average() {
-  let arr = [];
-  function inner(...args) {
-    if (arguments.length === 0) {
-      if (arr.length === 0) {
-        return 0;
-      } 
-    } else {
-      arr.push(arguments[0]);
+    let arr = [];
+    function inner(...args) {
+        if (arguments.length === 0) {
+            if (arr.length === 0) {
+                return 0;
+            }
+        } else {
+            arr.push(arguments[0]);
+        }
+        return arr.reduce((a, b) => a + b) / arr.length;
     }
-    return arr.reduce((a,b) => a + b) / arr.length;
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
@@ -337,42 +333,38 @@ console.log(avgSoFar()); // => should log 6
 console.log(avgSoFar(12)); // => should log 8
 console.log(avgSoFar()); // => should log 8
 
-
 // CHALLENGE 17
 function makeFuncTester(arrOfTests) {
-  let callback;
-  let arrays = arrOfTests;
-  function inner(func) {
-    callback = func;
-    for (let i = 0; i < arrays.length; i++) {
-      let firstElem = arrays[i][0];
-      let secondElem = arrays[i][1];
-      
-      if (callback(firstElem) !== secondElem) {
-        return false;
-      }
+    let callback;
+    let arrays = arrOfTests;
+    function inner(func) {
+        callback = func;
+        for (let i = 0; i < arrays.length; i++) {
+            let firstElem = arrays[i][0];
+            let secondElem = arrays[i][1];
+
+            if (callback(firstElem) !== secondElem) {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
-  }
-  return inner;
+    return inner;
 }
 
 // /*** Uncomment these to check your work! ***/
 const capLastTestCases = [];
-capLastTestCases.push(['hello', 'hellO']);
-capLastTestCases.push(['goodbye', 'goodbyE']);
-capLastTestCases.push(['howdy', 'howdY']);
+capLastTestCases.push(["hello", "hellO"]);
+capLastTestCases.push(["goodbye", "goodbyE"]);
+capLastTestCases.push(["howdy", "howdY"]);
 const shouldCapitalizeLast = makeFuncTester(capLastTestCases);
-const capLastAttempt1 = str => str.toUpperCase();
-const capLastAttempt2 = str => str.slice(0, -1) + str.slice(-1).toUpperCase();
+const capLastAttempt1 = (str) => str.toUpperCase();
+const capLastAttempt2 = (str) => str.slice(0, -1) + str.slice(-1).toUpperCase();
 console.log(shouldCapitalizeLast(capLastAttempt1)); // => should log false
 console.log(shouldCapitalizeLast(capLastAttempt2)); // => should log true
 
-
 // CHALLENGE 18
-function makeHistory(limit) {
-
-}
+function makeHistory(limit) {}
 
 // /*** Uncomment these to check your work! ***/
 // const myActions = makeHistory(2);
@@ -385,11 +377,8 @@ function makeHistory(limit) {
 // console.log(myActions('undo')); // => should log 'code undone'
 // console.log(myActions('undo')); // => should log 'nothing to undo'
 
-
 // CHALLENGE 19
-function blackjack(array) {
-
-}
+function blackjack(array) {}
 
 // /*** Uncomment these to check your work! ***/
 
